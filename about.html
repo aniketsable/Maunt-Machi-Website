@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn about Mount Machi Resort's journey since 2015. Discover our commitment to sustainable eco-tourism and hospitality in Maharashtra.">
+    <meta name="keywords" content="about Mount Machi, eco-resort story, sustainable tourism, Green Soul resort">
+    <meta property="og:title" content="About Us | Mount Machi Resort">
+    <meta property="og:description" content="Discover the story of Mount Machi Resort - a journey of nature, luxury, and sustainable tourism since 2015.">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <title>About Us | Mount Machi Resort - Our Story & Values</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --primary-green: #2E7D32;
+            --dark-green: #1B5E20;
+            --accent-beige: #FEEBB4;
+            --dark-maroon: #371419;
+            --light-maroon: #4A1F25;
+            --white: #FFFFFF;
+            --light-gray: #F5F5F5;
+            --text-dark: #333333;
+            --gold: #FFD700;
+            --premium-gold: #D4AF37;
+        }
+
+        /* ===== NEW RESPONSIVE NAVIGATION BAR ===== */
+        .navbar {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 10px 0;
+            transition: transform 0.25s ease;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            z-index: 1001;
+        }
+
+        .logo img {
+            height: 45px;
+            width: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover img {
+            transform: scale(1.05);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+        }
+
+        .nav-item {
+            position: relative;
+            margin: 0 8px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-green);
+            background-color: rgba(46, 125, 50, 0.05);
+        }
+
+        .nav-link.active {
+            color: var(--primary-green);
+            background-color: rgba(46, 125, 50, 0.1);
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 5px;
+            height: 5px;
+            background-color: var(--primary-green);
+            border-radius: 50%;
+        }
+
+        .nav-buttons {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .call-btn, .book-now-btn {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .call-btn {
+            background: transparent;
+            border: 2px solid var(--primary-green);
+            color: var(--primary-green);
+        }
+
+        .call-btn:hover {
+            background: var(--primary-green);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .book-now-btn {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        .book-now-btn:hover {
+            background: var(--dark-green);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        /* Mobile Menu Toggle */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 10px;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: var(--text-dark);
+            margin: 5px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        /* Mobile Menu Styles */
+        @media screen and (max-width: 968px) {
+            .navbar { padding: 15px 0; }
+            .hamburger { display: block; }
+            .nav-menu { position: fixed; top: 70px; left: -100%; flex-direction: column; background-color: var(--white); width: 100%; height: calc(100vh - 70px); padding: 40px 0; box-shadow: 0 10px 15px rgba(0,0,0,0.1); transition: 0.3s; overflow-y: auto; z-index: 1000; }
+            .nav-menu.active { left: 0; }
+            .nav-item { margin: 15px 0; width: 80%; text-align: center; }
+            .nav-link { padding: 12px 20px; font-size: 1.1rem; border-radius: 8px; }
+            .nav-buttons { flex-direction: column; width: 80%; margin-top: 20px; gap: 15px; }
+            .call-btn, .book-now-btn { width: 100%; padding: 12px; font-size: 1rem; }
+        }
+
+        @media screen and (max-width: 480px) {
+            .nav-container { padding: 0 15px; }
+            .logo img { height: 40px; }
+            .nav-menu { top: 65px; height: calc(100vh - 65px); }
+        }
+
+        /* Hide navbar when scrolling down */
+        .navbar.nav-hidden { transform: translateY(-110%); }
+
+        /* Hero Section */
+        .about-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                        url('https://raw.githubusercontent.com/aniketsable/mount-machi/main/images/bg1.png');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 120px 0;
+            text-align: center;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-family: 'Montserrat', sans-serif;
+            color: #ffffff; /* explicit white for hero heading */
+            text-shadow: 0 2px 6px rgba(0,0,0,0.45); /* improve readability */
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+            color: #ffffff; /* explicit white for hero paragraph */
+            text-shadow: 0 1px 4px rgba(0,0,0,0.35);
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background-color: #f8f9fa;
+            padding: 60px 0;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 30px 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-green, #2e8b57);
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        /* Story Section */
+        .story-section {
+            padding: 100px 0;
+        }
+
+        .story-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .story-text h2 {
+            font-size: 2.8rem;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .story-text p {
+            margin-bottom: 20px;
+            line-height: 1.7;
+            color: #555;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .story-highlight {
+            background: linear-gradient(135deg, var(--primary-green, #2e8b57) 0%, var(--accent-beige, #f5f5dc) 100%);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 30px 0;
+            color: white;
+            font-style: italic;
+            font-size: 1.2rem;
+        }
+
+        .story-image {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .story-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .image-badge {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            color: var(--primary-green, #2e8b57);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Vision & Mission */
+        .vision-mission {
+            background-color: #f8f9fa;
+            padding: 100px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.8rem;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .vm-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .vm-card {
+            background: white;
+            padding: 50px 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .vm-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .vm-icon {
+            font-size: 3rem;
+            color: var(--primary-green, #2e8b57);
+            margin-bottom: 25px;
+        }
+
+        .vm-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .vm-card p {
+            color: #555;
+            line-height: 1.7;
+        }
+
+        /* Values Section */
+        .values-section {
+            padding: 100px 0;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .value-card {
+            text-align: center;
+            padding: 40px 25px;
+            border-radius: 15px;
+            background: white;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .value-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-green, #2e8b57) 0%, var(--accent-beige, #f5f5dc) 100%);
+        }
+
+        .value-icon img {
+            width: 40px;
+            height: 40px;
+            filter: brightness(0) invert(1);
+        }
+
+        .value-card h4 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .value-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Sustainability Section */
+        .sustainability-section {
+            padding: 100px 0;
+        }
+
+        .sustainability-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .sustainability-card {
+            text-align: center;
+            padding: 50px 30px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .sustainability-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .sustainability-icon {
+            font-size: 3.5rem;
+            color: var(--primary-green, #2e8b57);
+            margin-bottom: 25px;
+        }
+
+        .sustainability-card h4 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .sustainability-card p {
+            color: #666;
+            line-height: 1.7;
+        }
+
+        /* CTA Section */
+        .about-cta {
+            background: linear-gradient(135deg, var(--primary-green, #2e8b57) 0%, var(--dark-green, #1a5d3a) 100%);
+            padding: 100px 0;
+            text-align: center;
+            color: white;
+        }
+
+        .about-cta h2 {
+            font-size: 3rem;
+            margin-bottom: 25px;
+        }
+
+        .about-cta p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Buttons */
+        .btn-primary, .btn-secondary {
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--primary-green, #2e8b57);
+            border: 2px solid white;
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary-green, #2e8b57);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Navigation Footer */
+        .navigation-footer {
+            background-color: var(--dark-maroon);
+            padding: 30px 0;
+            margin-top: 80px;
+            border-top: 2px solid var(--primary-green);
+        }
+
+        .footer-nav ul {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .footer-nav a {
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: color 0.3s, transform 0.3s;
+            position: relative;
+            padding: 8px 0;
+        }
+
+        .footer-nav a:hover {
+            color: var(--accent-beige);
+            transform: translateY(-2px);
+        }
+
+        .footer-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-green);
+            transition: width 0.3s ease;
+        }
+
+        .footer-nav a:hover::after {
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .navigation-footer {
+                padding: 20px 0;
+                margin-top: 60px;
+            }
+
+            .footer-nav ul {
+                gap: 15px;
+                font-size: 0.9rem;
+            }
+
+            .footer-nav a {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Floating Buttons */
+        .whatsapp-float, .call-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-float {
+            right: 40px;
+        }
+
+        .call-float {
+            right: 110px;
+            background-color: var(--primary-green, #2e8b57);
+        }
+
+        .whatsapp-float:hover, .call-float:hover {
+            transform: scale(1.1);
+            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Animation Classes */
+        .animate-fadeInUp {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .animate-delay-1 { transition-delay: 0.2s; }
+        .animate-delay-2 { transition-delay: 0.4s; }
+        .animate-delay-3 { transition-delay: 0.6s; }
+        .animate-delay-4 { transition-delay: 0.8s; }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .story-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .about-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-hero p {
+                font-size: 1.1rem;
+            }
+
+            .story-text h2 {
+                font-size: 2.2rem;
+            }
+
+            .about-cta h2 {
+                font-size: 2.5rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .vm-card {
+                padding: 40px 25px;
+            }
+
+            .stat-number {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .about-hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .story-section, .vision-mission, .values-section, .sustainability-section, .about-cta {
+                padding: 70px 0;
+            }
+
+            .whatsapp-float, .call-float {
+                width: 50px;
+                height: 50px;
+                font-size: 24px;
+                bottom: 20px;
+            }
+
+            .whatsapp-float {
+                right: 20px;
+            }
+
+            .call-float {
+                right: 80px;
+            }
+        }
+
+        /* FAQ styles moved from contact.html */
+        .faq-section {
+            margin: 60px 0;
+        }
+
+        .faq-item {
+            background-color: var(--white);
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border: 2px solid var(--accent-beige);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+            color: var(--primary-dark, #234); 
+            transition: background-color 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background-color: rgba(58, 155, 42, 0.05);
+        }
+
+        .faq-question.active {
+            background-color: var(--primary-green);
+            color: white;
+        }
+
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .faq-answer.active {
+            padding: 20px;
+            max-height: 500px;
+        }
+
+        .faq-toggle {
+            transition: transform 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- New Responsive Navigation Bar -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <img src="files/images/logo.png" alt="Mount Machi Resort" width="150" height="45">
+            </a>
+            
+            <!-- Hamburger Menu Button -->
+            <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <!-- Navigation Menu -->
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="about.html" class="nav-link active">About</a></li>
+                <li class="nav-item"><a href="packages.html" class="nav-link">Packages</a></li>
+                <li class="nav-item"><a href="facilities.html" class="nav-link">Facilities</a></li>
+                <li class="nav-item"><a href="gallery.html" class="nav-link">Gallery</a></li>
+                <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="about-hero">
+        <div class="container">
+            <div class="hero-content animate-fadeInUp">
+                <h1>Our Story & Legacy</h1>
+                <p>Where Nature Meets Luxury. Discover the journey of Green Soul and our commitment to creating unforgettable experiences in harmony with nature.</p>
+                <div class="hero-cta">
+                    <a href="#story" class="btn-primary"><i class="fas fa-book-open"></i> Explore Our Story</a>
+                    <a href="packages.html" class="btn-secondary"><i class="fas fa-calendar-alt"></i> Book Your Stay</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Mobile Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+        
+        if (hamburger && navMenu) {
+            hamburger.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                hamburger.classList.toggle('active');
+                if (navMenu.classList.contains('active')) document.body.style.overflow = 'hidden';
+                else document.body.style.overflow = 'auto';
+            });
+        }
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                if (navMenu) navMenu.classList.remove('active');
+                if (hamburger) hamburger.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+        });
+
+        // Hide navbar on scroll down, show on scroll up
+        (function() {
+            const navbar = document.querySelector('.navbar');
+            let lastScroll = 0;
+            let ticking = false;
+
+            window.addEventListener('scroll', () => {
+                const current = window.scrollY || window.pageYOffset;
+                if (!ticking) {
+                    window.requestAnimationFrame(() => {
+                        if (current > lastScroll && current > 100) navbar.classList.add('nav-hidden');
+                        else navbar.classList.remove('nav-hidden');
+                        lastScroll = current <= 0 ? 0 : current;
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            }, { passive: true });
+        })();
+    </script>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-container">
+                <div class="stat-card animate-fadeInUp">
+                    <div class="stat-number">5000+</div>
+                    <div class="stat-label">Happy Guests</div>
+                </div>
+                <div class="stat-card animate-fadeInUp animate-delay-2">
+                    <div class="stat-number">85%</div>
+                    <div class="stat-label">Repeat Visitors</div>
+                </div>
+                <div class="stat-card animate-fadeInUp animate-delay-3">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Highly Focused on Botanical Nursery</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Story -->
+    <section id="story" class="story-section">
+        <div class="container">
+            <div class="story-container">
+                <div class="story-text animate-fadeInUp">
+                    <h2>The Mount Machi Journey</h2>
+                    <p> Mount Machi Resort began as a vision to create a sanctuary where people could escape the chaos of urban life and reconnect with nature. What started as a small family-run retreat has blossomed into Maharashtra's premier eco-friendly resort.</p>
+
+                    <p>Our founder, inspired by childhood memories of family vacations in the Western Ghats, envisioned a space where modern comfort meets untouched natural beauty. After years of careful planning and sustainable development, Mount Machi opened its doors, quickly becoming the go-to destination for those seeking peace, adventure, and authentic connection.</p>
+
+                    <div class="story-highlight animate-fadeInUp animate-delay-1">
+                        <p>"We don't just host guests; we create custodians of nature who leave with a renewed appreciation for our planet."</p>
+                    </div>
+
+                    <p class="animate-fadeInUp animate-delay-2">Today, Mount Machi stands as a testament to sustainable tourism, balancing luxury with environmental responsibility. Every tree, every stone, and every smile tells a story of passion, dedication, and love for the natural world.</p>
+                </div>
+
+                <div class="story-image animate-fadeInUp animate-delay-1">
+                    <img src="https://raw.githubusercontent.com/aniketsable/mount-machi/main/images/machi-side.jpg" alt="Mount Machi Founding Team">
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vision & Mission -->
+    <section class="vision-mission">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Purpose</h2>
+                <p>Guided by principles that shape every experience</p>
+            </div>
+
+            <div class="vm-container">
+                <div class="vm-card animate-fadeInUp">
+                    <div class="vm-icon"><i class="fas fa-eye"></i></div>
+                    <h3>Our Vision</h3>
+                    <p>To become India's leading eco-resort brand, inspiring a global movement towards sustainable tourism while preserving natural habitats for future generations.</p>
+                </div>
+
+                <div class="vm-card animate-fadeInUp animate-delay-1">
+                    <div class="vm-icon"><i class="fas fa-bullseye"></i></div>
+                    <h3>Our Mission</h3>
+                    <p>To provide transformative experiences that reconnect people with nature through sustainable practices, exceptional hospitality, and memorable adventures.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Values -->
+    <section class="values-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Core Values</h2>
+                <p>The principles that guide everything we do</p>
+            </div>
+
+            <div class="values-grid">
+                <div class="value-card animate-fadeInUp">
+                    <div class="value-icon"><i class="fas fa-leaf"></i></div>
+                    <h4>Sustainability</h4>
+                    <p>We practice and promote eco-friendly tourism, minimizing our environmental footprint while maximizing positive impact.</p>
+                </div>
+
+                <div class="value-card animate-fadeInUp animate-delay-1">
+                    <div class="value-icon"><i class="fas fa-home"></i></div>
+                    <h4>Authenticity</h4>
+                    <p>Every experience is genuine, every interaction heartfelt. We celebrate local culture and traditions.</p>
+                </div>
+
+                <div class="value-card animate-fadeInUp animate-delay-2">
+                    <div class="value-icon"><i class="fas fa-sun"></i></div>
+                    <h4>Innovation</h4>
+                    <p>Continuously evolving to provide unique experiences while maintaining our commitment to nature.</p>
+                </div>
+
+                <div class="value-card animate-fadeInUp animate-delay-3">
+                    <div class="value-icon"><i class="fas fa-moon"></i></div>
+                    <h4>Community</h4>
+                    <p>Supporting local communities through employment, sourcing, and cultural preservation initiatives.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sustainability -->
+    <section class="sustainability-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Green Commitment</h2>
+                <p>Building a sustainable future together</p>
+            </div>
+
+            <div class="sustainability-grid">
+                
+
+                <div class="sustainability-card animate-fadeInUp animate-delay-1">
+                    <div class="sustainability-icon"><i class="fas fa-recycle"></i></div>
+                    <h4>Waste Management</h4>
+                    <p>Comprehensive recycling program with 85% waste diversion from landfills.</p>
+                </div>
+
+                <div class="sustainability-card animate-fadeInUp animate-delay-2">
+                    <div class="sustainability-icon"><i class="fas fa-hand-holding-water"></i></div>
+                    <h4>Water Conservation</h4>
+                    <p>Rainwater harvesting and greywater recycling systems implemented throughout the resort.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="about-cta">
+        <div class="container">
+            <h2 class="animate-fadeInUp">Experience Our Story Firsthand</h2>
+            <p class="animate-fadeInUp animate-delay-1">Join thousands of guests who have discovered the magic of Mount Machi. Book your stay today and become part of our story.</p>
+
+            <div class="cta-buttons animate-fadeInUp animate-delay-2">
+                <a href="packages.html" class="btn-primary"><i class="fas fa-calendar-check"></i> Book Your Stay</a>
+                <a href="contact.html" class="btn-secondary"><i class="fas fa-envelope"></i> Contact Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Frequently Asked Questions (moved from contact.html) -->
+    <div class="faq-section">
+        <div class="section-title">
+            <h2>Frequently Asked Questions</h2>
+            <p>Quick answers to common questions</p>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>What is the check-in and check-out time?</span>
+                <i class="fas fa-chevron-down faq-toggle"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Check-in time depends on your package selection. Standard check-out time is 10:00 AM. Early check-in and late check-out may be available on request, subject to availability and additional charges.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>Is advance booking required?</span>
+                <i class="fas fa-chevron-down faq-toggle"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Yes, we recommend booking at least 3-7 days in advance, especially for weekends and holidays. Last-minute bookings are subject to availability.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>What payment methods do you accept?</span>
+                <i class="fas fa-chevron-down faq-toggle"></i>
+            </div>
+            <div class="faq-answer">
+                <p>We accept cash, credit/debit cards, UPI payments, and bank transfers. A deposit may be required at the time of booking confirmation.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>Are pets allowed at the resort?</span>
+                <i class="fas fa-chevron-down faq-toggle"></i>
+            </div>
+            <div class="faq-answer">
+                <p>yes its allowed</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>Do you provide transportation services?</span>
+                <i class="fas fa-chevron-down faq-toggle"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Yes, we can arrange pick-up and drop services from Pune city, railway station, or airport. This service is available at additional charges and requires advance booking.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Footer -->
+    <section class="navigation-footer">
+        <div class="container">
+            <nav class="footer-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="packages.html">Packages</a></li>
+                    <li><a href="facilities.html">Facilities</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Floating Buttons -->
+    <a href="https://wa.me/919075112200?text=Hi%20Mount%20Machi%20Resort%2C%20I%20just%20read%20your%20story%20and%20would%20like%20to%20know%20more" class="whatsapp-float" target="_blank" aria-label="Contact us on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <a href="tel:+919075112200" class="call-float" aria-label="Call us">
+        <i class="fas fa-phone"></i>
+    </a>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Animation on scroll
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.animate-fadeInUp');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                if (elementTop < windowHeight - 100) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const animatedElements = document.querySelectorAll('.animate-fadeInUp');
+            animatedElements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(40px)';
+                el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            });
+            animateOnScroll();
+        });
+
+        window.addEventListener('scroll', animateOnScroll);
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // (Header/menu logic handled by responsive navbar script inserted earlier)
+
+        // Initialize animation for timeline items
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        timelineItems.forEach((item, index) => {
+            item.style.opacity = '0';
+            if (index % 2 === 0) {
+                item.style.transform = 'translateX(-30px)';
+            } else {
+                item.style.transform = 'translateX(30px)';
+            }
+            item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        });
+
+        // FAQ functionality (moved from contact.html)
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', function() {
+                const answer = this.nextElementSibling;
+                const isActive = this.classList.contains('active');
+
+                // Close all FAQ items
+                document.querySelectorAll('.faq-question').forEach(q => {
+                    q.classList.remove('active');
+                    if (q.nextElementSibling) q.nextElementSibling.classList.remove('active');
+                });
+
+                // Open clicked item if it wasn't active
+                if (!isActive) {
+                    this.classList.add('active');
+                    if (answer) answer.classList.add('active');
+                }
+            });
+        });
+
+        // Open first FAQ by default
+        if (faqQuestions.length > 0) {
+            faqQuestions[0].click();
+        }
+    </script>
+</body>
+</html>

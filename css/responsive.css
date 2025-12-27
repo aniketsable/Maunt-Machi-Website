@@ -1,0 +1,61 @@
+/* Responsive helpers and smooth scrolling for non-index pages */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Make images and media scale nicely */
+img, video, iframe {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Flexible container */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+/* Make navigation wrap on small screens and be touch-friendly */
+nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+}
+
+nav a {
+  padding: 8px 10px;
+  display: inline-block;
+}
+
+/* Header spacing so fixed headers don't cover anchored sections */
+body {
+  scroll-padding-top: 90px;
+}
+
+/* Basic responsive breakpoints */
+@media (max-width: 1024px) {
+  .hero-content h1, .page-hero h1 { font-size: 2.5rem; }
+}
+
+@media (max-width: 768px) {
+  .header-container { padding: 12px; }
+  .logo img { height: 42px; }
+  .hero-content h1, .page-hero h1 { font-size: 2rem; }
+  .story-container, .contact-main, .yearly-content { grid-template-columns: 1fr !important; }
+}
+
+@media (max-width: 480px) {
+  body { font-size: 15px; }
+  .logo img { height: 38px; }
+}
+
+/* Utility: full-width buttons stack on small screens */
+.stack-full { display: flex; gap: 12px; }
+@media (max-width: 480px) { .stack-full { flex-direction: column; } }

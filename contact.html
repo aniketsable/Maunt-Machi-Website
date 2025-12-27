@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact Mount Machi Resort. Get in touch for bookings and inquiries.">
+    <title>Contact Us | Mount Machi Resort</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #2E7D32;
+            --dark-green: #1B5E20;
+            --accent-beige: #FEEBB4;
+            --dark-maroon: #371419;
+            --white: #FFFFFF;
+            --light-gray: #F5F5F5;
+            --text-dark: #333333;
+            --shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            color: var(--text-dark);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===== NEW RESPONSIVE NAVIGATION BAR ===== */
+        .navbar {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 10px 0;
+            transition: transform 0.25s ease;
+        }
+
+        /* Hide navbar when scrolling down */
+        .navbar.nav-hidden {
+            transform: translateY(-110%);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            z-index: 1001;
+        }
+
+        .logo img {
+            height: 45px;
+            width: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover img {
+            transform: scale(1.05);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+        }
+
+        .nav-item {
+            position: relative;
+            margin: 0 8px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-green);
+            background-color: rgba(46, 125, 50, 0.05);
+        }
+
+        .nav-link.active {
+            color: var(--primary-green);
+            background-color: rgba(46, 125, 50, 0.1);
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 5px;
+            height: 5px;
+            background-color: var(--primary-green);
+            border-radius: 50%;
+        }
+
+        .nav-buttons {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .call-btn, .book-now-btn {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .call-btn {
+            background: transparent;
+            border: 2px solid var(--primary-green);
+            color: var(--primary-green);
+        }
+
+        .call-btn:hover {
+            background: var(--primary-green);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .book-now-btn {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        .book-now-btn:hover {
+            background: var(--dark-green);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        /* Mobile Menu Toggle */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 10px;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: var(--text-dark);
+            margin: 5px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        /* Mobile Menu Styles */
+        @media screen and (max-width: 968px) {
+            .navbar {
+                padding: 15px 0;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(6px, 6px);
+            }
+            
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -6px);
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                flex-direction: column;
+                background-color: var(--white);
+                width: 100%;
+                height: calc(100vh - 70px);
+                padding: 40px 0;
+                box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+                transition: 0.3s;
+                overflow-y: auto;
+                z-index: 1000;
+            }
+            
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .nav-item {
+                margin: 15px 0;
+                width: 80%;
+                text-align: center;
+            }
+            
+            .nav-link {
+                padding: 12px 20px;
+                font-size: 1.1rem;
+                border-radius: 8px;
+            }
+            
+            .nav-link.active::after {
+                display: none;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                width: 80%;
+                margin-top: 20px;
+                gap: 15px;
+            }
+            
+            .call-btn, .book-now-btn {
+                width: 100%;
+                padding: 12px;
+                font-size: 1rem;
+            }
+        }
+
+        /* Adjust for very small screens */
+        @media screen and (max-width: 480px) {
+            .nav-container {
+                padding: 0 15px;
+            }
+            
+            .logo img {
+                height: 40px;
+            }
+            
+            .nav-menu {
+                top: 65px;
+                height: calc(100vh - 65px);
+            }
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(rgba(55, 20, 25, 0.85), rgba(55, 20, 25, 0.85)),
+                        url('https://raw.githubusercontent.com/aniketsable/mount-machi/main/images/tree.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 120px 0 40px;
+            text-align: center;
+            margin-top: 70px;
+        }
+
+        .page-header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        /* Main Content */
+        .contact-section {
+            padding: 40px 0;
+        }
+
+        .contact-main {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin: 40px 0;
+        }
+
+        .contact-info, .contact-form {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .info-icon {
+            background: var(--primary-green);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .info-content h3 {
+            margin: 0 0 8px 0;
+            color: var(--primary-green);
+            font-size: 1.1rem;
+        }
+
+        .info-content p {
+            margin: 5px 0;
+        }
+
+        .info-content a {
+            color: var(--primary-green);
+            text-decoration: none;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            background: var(--primary-green);
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--dark-green);
+            transform: translateY(-3px);
+        }
+
+        /* Form */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Poppins', sans-serif;
+            transition: border 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
+        }
+
+        textarea.form-input {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-submit {
+            background: var(--primary-green);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .form-submit:hover {
+            background: var(--dark-green);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .form-submit:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .form-message {
+            padding: 10px;
+            margin: 15px 0;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .form-message.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: block;
+        }
+
+        .form-message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: block;
+        }
+
+        /* Map */
+        .contact-map {
+            height: 300px;
+            margin: 40px 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .contact-map iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Directions */
+        .directions {
+            background: var(--light-gray);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 30px 0;
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Navigation Footer */
+        .navigation-footer {
+            background-color: var(--dark-maroon);
+            padding: 30px 0;
+            margin-top: 80px;
+            border-top: 2px solid var(--primary-green);
+        }
+
+        .footer-nav ul {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .footer-nav a {
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: color 0.3s, transform 0.3s;
+            position: relative;
+            padding: 8px 0;
+        }
+
+        .footer-nav a:hover {
+            color: var(--accent-beige);
+            transform: translateY(-2px);
+        }
+
+        .footer-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-green);
+            transition: width 0.3s ease;
+        }
+
+        .footer-nav a:hover::after {
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .navigation-footer {
+                padding: 20px 0;
+                margin-top: 60px;
+            }
+
+            .footer-nav ul {
+                gap: 15px;
+                font-size: 0.9rem;
+            }
+
+            .footer-nav a {
+                font-size: 0.9rem;
+            }
+
+            .page-header {
+                padding: 100px 0 30px;
+                margin-top: 80px;
+            }
+
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .contact-main {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* WhatsApp & Call Buttons */
+        .whatsapp-float, .call-float {
+            position: fixed;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.3rem;
+            text-decoration: none;
+            z-index: 999;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-float {
+            background: #25D366;
+            bottom: 90px;
+            right: 20px;
+        }
+
+        .whatsapp-float:hover {
+            background: #128C7E;
+            transform: scale(1.1);
+        }
+
+        .call-float {
+            background: var(--primary-green);
+            bottom: 30px;
+            right: 20px;
+        }
+
+        .call-float:hover {
+            background: var(--dark-green);
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 480px) {
+            .contact-info, .contact-form {
+                padding: 20px;
+            }
+
+            .info-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- New Responsive Navigation Bar -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <img src="files/images/logo.png" alt="Mount Machi Resort" width="150" height="45">
+            </a>
+            
+            <!-- Hamburger Menu Button -->
+            <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <!-- Navigation Menu -->
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="about.html" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="packages.html" class="nav-link">Packages</a>
+                </li>
+                <li class="nav-item">
+                    <a href="facilities.html" class="nav-link">Facilities</a>
+                </li>
+                <li class="nav-item">
+                    <a href="gallery.html" class="nav-link">Gallery</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link active">Contact</a>
+                </li>
+                
+                <!-- Action buttons removed from header mobile menu -->
+            </ul>
+            
+            <!-- Action buttons removed from header desktop -->
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Contact Us</h1>
+            <p>Get in touch for bookings and inquiries</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="contact-main">
+                <!-- Contact Information -->
+                <div class="contact-info">
+                    <h2 style="color: var(--primary-green); margin-top: 0;">Contact Information</h2>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3>Address</h3>
+                            <p>Mount Machi Resort, Gat No. 125</p>
+                            <p>Gaud Dara Goan, Khed Shivapur</p>
+                            <p>Maharashtra 412205</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3>Phone & WhatsApp</h3>
+                            <p><a href="tel:+919075112200">+91 9075112200</a></p>
+                            <p><a href="tel:+919665186604">+91 9665186604</a></p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3>Email</h3>
+                            <p><a href="mailto:mountmachiiresort@gmail.com">mountmachiiresort@gmail.com</a></p>
+                        </div>
+                    </div>
+                    
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/mountmachi" target="_blank" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Contact Form -->
+                <div class="contact-form">
+                    <h3 style="color: var(--primary-green); margin-top: 0;">Send us a Message</h3>
+                    <p>Fill the form below and we'll contact you via WhatsApp</p>
+                    
+                    <form id="contactForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Full Name *</label>
+                                <input type="text" id="name" class="form-input" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Email Address</label>
+                                <input type="email" id="email" class="form-input">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Phone Number *</label>
+                            <input type="tel" id="phone" class="form-input" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Subject</label>
+                            <select id="subject" class="form-input">
+                                <option value="">Select a subject</option>
+                                <option value="Booking Inquiry">Booking Inquiry</option>
+                                <option value="Package Information">Package Information</option>
+                                <option value="General Question">General Question</option>
+                                <option value="Group Booking">Group Booking</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Your Message *</label>
+                            <textarea id="message" class="form-input" required></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="agree" required>
+                                I agree to share my details for contact purposes
+                            </label>
+                        </div>
+                        
+                        <div id="formMessage" class="form-message"></div>
+                        
+                        <button type="submit" class="form-submit" id="submitBtn">
+                            <i class="fab fa-whatsapp"></i> Send via WhatsApp
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Map -->
+            <div class="contact-map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3855.730008222658!2d73.83221327526618!3d18.360888182701917!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc293314b366967%3A0x9658c5de2fa066f2!2sMount%20Machi%20Resort!5e1!3m2!1sen!2sin!4v1761294288042!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+            
+            <!-- Directions -->
+            <div class="directions">
+                <h3 style="color: var(--primary-green); margin-top: 0;">How to Reach</h3>
+                <p><strong>From Pune:</strong> 15 km from Katraj, approx. 30 minutes drive</p>
+                <p><strong>From Mumbai:</strong> 120 km via Mumbai-Pune Expressway</p>
+                <p><strong>Nearest Railway:</strong> Pune Junction (26 km)</p>
+                <p><strong>Nearest Airport:</strong> Pune International Airport (34 km)</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <section class="navigation-footer">
+        <div class="container">
+            <nav class="footer-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="packages.html">Packages</a></li>
+                    <li><a href="facilities.html">Facilities</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Floating Buttons -->
+    <a href="https://wa.me/919075112200?text=Hi%20Mount%20Machi%20Resort%2C%20I%20just%20read%20your%20story%20and%20would%20like%20to%20know%20more" class="whatsapp-float" target="_blank" aria-label="Contact us on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <a href="tel:+919075112200" class="call-float" aria-label="Call us">
+        <i class="fas fa-phone"></i>
+    </a>
+
+    <script>
+        // Mobile Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+        
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+            
+            // Prevent body scroll when menu is open
+            if (navMenu.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                hamburger.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', (event) => {
+            const isClickInsideMenu = navMenu.contains(event.target);
+            const isClickOnHamburger = hamburger.contains(event.target);
+            
+            if (!isClickInsideMenu && !isClickOnHamburger && navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+                hamburger.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // Contact Form Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('contactForm');
+            const submitBtn = document.getElementById('submitBtn');
+            const formMessage = document.getElementById('formMessage');
+            const phoneInput = document.getElementById('phone');
+            
+            // Format phone input
+            phoneInput.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length > 10) value = value.substring(0, 10);
+                e.target.value = value;
+            });
+            
+            // Form submission
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form values
+                const name = document.getElementById('name').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const phone = document.getElementById('phone').value.trim();
+                const subject = document.getElementById('subject').value;
+                const message = document.getElementById('message').value.trim();
+                const agree = document.getElementById('agree').checked;
+                
+                // Validation
+                if (!name || name.length < 2) {
+                    showMessage('Please enter a valid name (at least 2 characters)', 'error');
+                    return;
+                }
+                
+                if (!phone || phone.length < 10) {
+                    showMessage('Please enter a valid 10-digit phone number', 'error');
+                    return;
+                }
+                
+                if (!message || message.length < 5) {
+                    showMessage('Please enter a message (at least 5 characters)', 'error');
+                    return;
+                }
+                
+                if (!agree) {
+                    showMessage('Please agree to share your details', 'error');
+                    return;
+                }
+                
+                // Show loading
+                const originalText = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Preparing...';
+                submitBtn.disabled = true;
+                
+                // Format WhatsApp message
+                const formattedMessage = formatWhatsAppMessage(name, email, phone, subject, message);
+                
+                // Open WhatsApp
+                setTimeout(() => {
+                    openWhatsApp(formattedMessage);
+                    
+                    // Show success message
+                    showMessage('Opening WhatsApp with your message...', 'success');
+                    
+                    // Reset form after 2 seconds
+                    setTimeout(() => {
+                        form.reset();
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                    }, 2000);
+                    
+                    // Clear success message after 5 seconds
+                    setTimeout(() => {
+                        formMessage.style.display = 'none';
+                    }, 5000);
+                }, 1000);
+            });
+            
+            function formatWhatsAppMessage(name, email, phone, subject, message) {
+                const date = new Date().toLocaleDateString('en-IN');
+                const time = new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
+                
+                let formattedMessage = `*MOUNT MACHI RESORT - CONTACT FORM*\n`;
+                formattedMessage += `━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+                formattedMessage += `*📋 Contact Details:*\n`;
+                formattedMessage += `• *Name:* ${name}\n`;
+                formattedMessage += `• *Phone:* ${phone}\n`;
+                if (email) formattedMessage += `• *Email:* ${email}\n`;
+                if (subject) formattedMessage += `• *Subject:* ${subject}\n`;
+                formattedMessage += `• *Date:* ${date}\n`;
+                formattedMessage += `• *Time:* ${time}\n\n`;
+                formattedMessage += `*💬 Message:*\n${message}\n\n`;
+                formattedMessage += `━━━━━━━━━━━━━━━━━━━━━━\n`;
+                formattedMessage += `_Sent via Mount Machi Resort Website_`;
+                
+                return formattedMessage;
+            }
+            
+            function openWhatsApp(message) {
+                const whatsappNumber = '919075112200';
+                const encodedMessage = encodeURIComponent(message);
+                const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+                
+                window.open(whatsappUrl, '_blank');
+            }
+            
+            function showMessage(text, type) {
+                formMessage.textContent = text;
+                formMessage.className = 'form-message ' + type;
+                formMessage.style.display = 'block';
+                
+                formMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        });
+
+        // Hide navbar on scroll down, show on scroll up
+        (function() {
+            const navbar = document.querySelector('.navbar');
+            const navMenu = document.getElementById('nav-menu');
+            const hamburgerBtn = document.getElementById('hamburger');
+            let lastScroll = 0;
+            let ticking = false;
+
+            window.addEventListener('scroll', () => {
+                const current = window.scrollY || window.pageYOffset;
+
+                if (!ticking) {
+                    window.requestAnimationFrame(() => {
+                        if (current > lastScroll && current > 100) {
+                            // scrolling down
+                            navbar.classList.add('nav-hidden');
+                        } else {
+                            // scrolling up
+                            navbar.classList.remove('nav-hidden');
+                        }
+
+                        lastScroll = current <= 0 ? 0 : current;
+                        ticking = false;
+                    });
+
+                    ticking = true;
+                }
+            }, { passive: true });
+
+            // If mobile menu is opened, ensure navbar stays visible
+            if (hamburgerBtn && navMenu) {
+                hamburgerBtn.addEventListener('click', () => {
+                    if (navMenu.classList.contains('active')) {
+                        navbar.classList.remove('nav-hidden');
+                    }
+                });
+            }
+        })();
+    </script>
+</body>
+</html>

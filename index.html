@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mount Machi Resort | Animated Intro</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            height: 100vh;
+            overflow: hidden;
+            background: #0a1f1f;
+            opacity: 0;
+            animation: bodyFadeIn 0.5s ease 0.5s forwards;
+        }
+        
+        @keyframes bodyFadeIn {
+            to { opacity: 1; }
+        }
+        
+        /* Main Animation Container */
+        .animation-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        /* Logo Container (will move from center to top-left corner) */
+        .logo-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            opacity: 1;
+            width: 80%;
+            max-width: 800px;
+            pointer-events: none;
+            animation: logoAnimation 3.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s forwards;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .logo-img {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.7));
+            animation: logoPulse 2s ease-in-out 0.5s infinite;
+        }
+        
+        @keyframes logoPulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.95; }
+        }
+        
+        /* Smooth animation to top-left corner */
+        @keyframes logoAnimation {
+            0% {
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%) scale(1);
+                width: 80%;
+                opacity: 1;
+            }
+            30% {
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%) scale(0.9);
+                width: 70%;
+                opacity: 1;
+            }
+            50% {
+                top: 40%;
+                left: 40%;
+                transform: translate(-50%, -50%) scale(0.7);
+                width: 60%;
+                opacity: 0.95;
+            }
+            70% {
+                top: 30%;
+                left: 30%;
+                transform: translate(-50%, -50%) scale(0.5);
+                width: 50%;
+                opacity: 0.9;
+            }
+            90% {
+                top: 20px;
+                left: 20px;
+                transform: translate(0, 0) scale(0.3);
+                width: 250px;
+                opacity: 0.85;
+            }
+            100% {
+                top: 20px;
+                left: 20px;
+                transform: translate(0, 0) scale(0.3);
+                width: 250px;
+                opacity: 0.9;
+            }
+        }
+        
+        /* Video Container */
+        .video-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0;
+            animation: videoFadeIn 2s ease 3s forwards;
+        }
+        
+        @keyframes videoFadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        
+        .video-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.7) contrast(1.1);
+        }
+        
+        /* Navigation Buttons: show from middle to bottom — 3 left, 3 right */
+        .bottom-nav-buttons {
+            position: absolute;
+            bottom: 100px;
+            left: 0;
+            right: 0;
+            z-index: 3;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding: 0 40px;
+            opacity: 0;
+            animation: fadeInUp 1.5s ease 4s forwards;
+            box-sizing: border-box;
+            pointer-events: none;
+        }
+
+        /* allow the columns to receive pointer events */
+        .bottom-nav-buttons .bottom-left-buttons,
+        .bottom-nav-buttons .bottom-right-buttons {
+            pointer-events: auto;
+        }
+
+        .bottom-left-buttons, .bottom-right-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 220px;
+        }
+
+        .bottom-left-buttons {
+            align-items: flex-start;
+        }
+
+        .bottom-right-buttons {
+            align-items: flex-end;
+        }
+        
+        .nav-button {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 12px 24px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-decoration: none;
+            text-align: center;
+            min-width: 150px;
+            backdrop-filter: blur(10px);
+            text-transform: uppercase;
+            opacity: 0.9;
+            transform: translateY(20px);
+            animation: buttonSlideUp 0.6s ease forwards;
+        }
+        
+        /* Stagger the button animations */
+        .bottom-left-buttons .nav-button:nth-child(1) { animation-delay: 4.2s; }
+        .bottom-left-buttons .nav-button:nth-child(2) { animation-delay: 4.4s; }
+        .bottom-left-buttons .nav-button:nth-child(3) { animation-delay: 4.6s; }
+        .bottom-right-buttons .nav-button:nth-child(1) { animation-delay: 4.3s; }
+        .bottom-right-buttons .nav-button:nth-child(2) { animation-delay: 4.5s; }
+        
+        @keyframes buttonSlideUp {
+            to {
+                opacity: 0.9;
+                transform: translateY(0);
+            }
+        }
+        
+        .nav-button:hover {
+            background: rgba(139, 195, 74, 0.7);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            border-color: #8bc34a;
+            opacity: 1;
+            letter-spacing: 1.2px;
+        }
+        
+        .nav-button i {
+            margin-right: 10px;
+            font-size: 1rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .nav-button:hover i {
+            transform: scale(1.2);
+        }
+        
+        /* Audio Controls - Simplified to just speaker icon */
+        .audio-controls {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 4;
+            opacity: 0;
+            animation: fadeInUp 1s ease 4.8s forwards;
+        }
+        
+        .audio-btn {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .audio-btn:hover {
+            background: rgba(139, 195, 74, 0.3);
+            border-color: #8bc34a;
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .audio-icon {
+            font-size: 1.5rem;
+            color: #8bc34a;
+            position: relative;
+        }
+        
+        /* Sound wave animation - only show when audio is playing */
+        .sound-wave {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            height: 30px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .audio-playing .sound-wave {
+            opacity: 1;
+        }
+        
+        .sound-bar {
+            width: 4px;
+            background-color: #8bc34a;
+            border-radius: 2px;
+            animation: soundWave 1.5s ease-in-out infinite;
+            transform-origin: bottom;
+        }
+        
+        .sound-bar:nth-child(1) { animation-delay: 0s; height: 8px; }
+        .sound-bar:nth-child(2) { animation-delay: 0.1s; height: 12px; }
+        .sound-bar:nth-child(3) { animation-delay: 0.2s; height: 16px; }
+        .sound-bar:nth-child(4) { animation-delay: 0.3s; height: 12px; }
+        .sound-bar:nth-child(5) { animation-delay: 0.4s; height: 8px; }
+        
+        @keyframes soundWave {
+            0%, 100% { 
+                transform: scaleY(0.5); 
+                opacity: 0.7;
+            }
+            50% { 
+                transform: scaleY(1); 
+                opacity: 1;
+            }
+        }
+        
+        /* Mute icon state */
+        .audio-muted .audio-icon i {
+            color: #ff5252;
+        }
+        
+        /* Utility Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .logo-container {
+                width: 70%;
+                max-width: 700px;
+            }
+            
+            @keyframes logoAnimation {
+                0% {
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%) scale(1);
+                    width: 70%;
+                }
+                30% {
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%) scale(0.9);
+                    width: 60%;
+                }
+                50% {
+                    top: 40%;
+                    left: 40%;
+                    transform: translate(-50%, -50%) scale(0.7);
+                    width: 50%;
+                }
+                70% {
+                    top: 30%;
+                    left: 30%;
+                    transform: translate(-50%, -50%) scale(0.5);
+                    width: 40%;
+                }
+                90% {
+                    top: 20px;
+                    left: 20px;
+                    transform: translate(0, 0) scale(0.35);
+                    width: 200px;
+                }
+                100% {
+                    top: 20px;
+                    left: 20px;
+                    transform: translate(0, 0) scale(0.35);
+                    width: 200px;
+                }
+            }
+            
+            .bottom-nav-buttons {
+                padding: 0 30px;
+                bottom: 90px;
+            }
+            
+            .nav-button {
+                padding: 10px 20px;
+                min-width: 140px;
+                font-size: 0.85rem;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .logo-container {
+                width: 80%;
+                max-width: 600px;
+            }
+            
+            @keyframes logoAnimation {
+                0% {
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%) scale(1);
+                    width: 80%;
+                }
+                30% {
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%) scale(0.9);
+                    width: 70%;
+                }
+                50% {
+                    top: 40%;
+                    left: 40%;
+                    transform: translate(-50%, -50%) scale(0.7);
+                    width: 60%;
+                }
+                70% {
+                    top: 30%;
+                    left: 30%;
+                    transform: translate(-50%, -50%) scale(0.5);
+                    width: 50%;
+                }
+                90% {
+                    top: 15px;
+                    left: 15px;
+                    transform: translate(0, 0) scale(0.4);
+                    width: 180px;
+                }
+                100% {
+                    top: 15px;
+                    left: 15px;
+                    transform: translate(0, 0) scale(0.4);
+                    width: 180px;
+                }
+            }
+            
+            .bottom-nav-buttons {
+                bottom: 80px;
+                padding: 0 20px;
+                flex-direction: column;
+                gap: 25px;
+                align-items: center;
+            }
+
+            .bottom-left-buttons, .bottom-right-buttons {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 12px;
+                max-width: 100%;
+            }
+            
+            .nav-button {
+                padding: 10px 18px;
+                min-width: 130px;
+                font-size: 0.8rem;
+                animation-delay: 4s !important;
+            }
+            
+            .audio-controls {
+                bottom: 140px;
+            }
+            
+            .audio-btn {
+                width: 55px;
+                height: 55px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .logo-container {
+                width: 85%;
+                max-width: 500px;
+            }
+            
+            @keyframes logoAnimation {
+                0% {
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%) scale(1);
+                    width: 85%;
+                }
+                30% {
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%) scale(0.9);
+                    width: 75%;
+                }
+                50% {
+                    top: 40%;
+                    left: 40%;
+                    transform: translate(-50%, -50%) scale(0.7);
+                    width: 65%;
+                }
+                70% {
+                    top: 30%;
+                    left: 30%;
+                    transform: translate(-50%, -50%) scale(0.5);
+                    width: 55%;
+                }
+                90% {
+                    top: 10px;
+                    left: 10px;
+                    transform: translate(0, 0) scale(0.45);
+                    width: 150px;
+                }
+                100% {
+                    top: 10px;
+                    left: 10px;
+                    transform: translate(0, 0) scale(0.45);
+                    width: 150px;
+                }
+            }
+            
+            .bottom-nav-buttons {
+                bottom: 70px;
+                padding: 0 15px;
+                gap: 20px;
+            }
+            
+            .nav-button {
+                padding: 9px 16px;
+                min-width: 120px;
+                font-size: 0.75rem;
+            }
+            
+            .audio-controls {
+                bottom: 150px;
+            }
+            
+            .audio-btn {
+                width: 50px;
+                height: 50px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .logo-container {
+                width: 90%;
+                max-width: 400px;
+            }
+            
+            @keyframes logoAnimation {
+                0% {
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%) scale(1);
+                    width: 90%;
+                }
+                30% {
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%) scale(0.9);
+                    width: 80%;
+                }
+                50% {
+                    top: 40%;
+                    left: 40%;
+                    transform: translate(-50%, -50%) scale(0.7);
+                    width: 70%;
+                }
+                70% {
+                    top: 30%;
+                    left: 30%;
+                    transform: translate(-50%, -50%) scale(0.5);
+                    width: 60%;
+                }
+                90% {
+                    top: 10px;
+                    left: 10px;
+                    transform: translate(0, 0) scale(0.5);
+                    width: 120px;
+                }
+                100% {
+                    top: 10px;
+                    left: 10px;
+                    transform: translate(0, 0) scale(0.5);
+                    width: 120px;
+                }
+            }
+            
+            .bottom-nav-buttons {
+                bottom: 60px;
+                padding: 0 10px;
+                gap: 15px;
+            }
+            
+            .bottom-left-buttons, .bottom-right-buttons {
+                gap: 8px;
+            }
+            
+            .nav-button {
+                padding: 8px 14px;
+                min-width: 110px;
+                font-size: 0.7rem;
+            }
+            
+            .nav-button i {
+                font-size: 0.85rem;
+                margin-right: 6px;
+            }
+            
+            .audio-controls {
+                bottom: 140px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .logo-container {
+                width: 95%;
+                max-width: 350px;
+            }
+            
+            @keyframes logoAnimation {
+                0% {
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%) scale(1);
+                    width: 95%;
+                }
+                30% {
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%) scale(0.9);
+                    width: 85%;
+                }
+                50% {
+                    top: 40%;
+                    left: 40%;
+                    transform: translate(-50%, -50%) scale(0.7);
+                    width: 75%;
+                }
+                70% {
+                    top: 30%;
+                    left: 30%;
+                    transform: translate(-50%, -50%) scale(0.5);
+                    width: 65%;
+                }
+                90% {
+                    top: 8px;
+                    left: 8px;
+                    transform: translate(0, 0) scale(0.55);
+                    width: 100px;
+                }
+                100% {
+                    top: 8px;
+                    left: 8px;
+                    transform: translate(0, 0) scale(0.55);
+                    width: 100px;
+                }
+            }
+            
+            .bottom-nav-buttons {
+                bottom: 50px;
+                padding: 0 8px;
+            }
+            
+            .nav-button {
+                padding: 7px 12px;
+                min-width: 100px;
+                font-size: 0.65rem;
+            }
+            
+            .audio-controls {
+                bottom: 130px;
+            }
+            
+            .audio-btn {
+                width: 45px;
+                height: 45px;
+            }
+            
+            .audio-icon {
+                font-size: 1.3rem;
+            }
+        }
+        
+        /* Fallback for missing video */
+        .video-fallback {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0a1f1f 0%, #1a3c3c 100%);
+            display: none;
+            z-index: 1;
+        }
+        
+        .video-container.fallback .video-fallback {
+            display: block;
+        }
+        
+        /* Fallback for missing logo */
+        .logo-fallback {
+            color: white;
+            font-family: 'Bebas Neue', 'Impact', sans-serif;
+            font-size: 3rem;
+            text-align: center;
+            display: none;
+        }
+        
+        .logo-container.fallback .logo-fallback {
+            display: block;
+        }
+        
+        .logo-container.fallback .logo-img {
+            display: none;
+        }
+    </style>
+    
+    <!-- Font imports -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Main Animation Container -->
+    <div class="animation-container">
+        <!-- Logo Container (will move from center to top-left corner) -->
+        <div class="logo-container" id="logoContainer">
+            <img src="files/images/logo.png" alt="Mount Machi Resort Logo" class="logo-img" id="logoImg">
+            <div class="logo-fallback">Mount Machi Resort</div>
+        </div>
+        
+        <!-- Video Background -->
+        <div class="video-container" id="videoContainer">
+            <video autoplay muted loop playsinline>
+                <source src="files/images/mountmachi-video.mp4" type="video/mp4">
+            </video>
+            <div class="video-fallback"></div>
+        </div>
+        
+        <!-- Navigation Buttons at Bottom Sides (Left and Right) -->
+        <div class="bottom-nav-buttons" id="navButtons">
+            <div class="bottom-left-buttons">
+                <a href="about.html" class="nav-button">
+                    <i class="fas fa-info-circle"></i> About
+                </a>
+                <a href="facilities.html" class="nav-button">
+                    <i class="fas fa-swimming-pool"></i> Facilities
+                </a>
+                <a href="gallery.html" class="nav-button">
+                    <i class="fas fa-images"></i> Gallery
+                </a>
+            </div>
+            
+            <div class="bottom-right-buttons">
+                <a href="packages.html" class="nav-button">
+                    <i class="fas fa-gift"></i> Packages
+                </a>
+                <a href="contact.html" class="nav-button">
+                    <i class="fas fa-phone-alt"></i> Contact
+                </a>
+            </div>
+        </div>
+        
+        <!-- Audio Controls - Only Speaker Icon -->
+        <div class="audio-controls">
+            <button class="audio-btn" id="audioToggle">
+                <div class="sound-wave" id="soundWave">
+                    <div class="sound-bar"></div>
+                    <div class="sound-bar"></div>
+                    <div class="sound-bar"></div>
+                    <div class="sound-bar"></div>
+                    <div class="sound-bar"></div>
+                </div>
+                <div class="audio-icon">
+                    <i class="fas fa-volume-up" id="speakerIcon"></i>
+                </div>
+            </button>
+        </div>
+        
+        <!-- Background Audio -->
+        <audio id="backgroundAudio" loop preload="auto">
+            <source src="files/Music/1min-nature.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+    
+    <script>
+        // DOM Elements
+        const logoContainer = document.getElementById('logoContainer');
+        const logoImg = document.getElementById('logoImg');
+        const videoContainer = document.getElementById('videoContainer');
+        const navButtons = document.getElementById('navButtons');
+        const backgroundAudio = document.getElementById('backgroundAudio');
+        const audioToggle = document.getElementById('audioToggle');
+        const speakerIcon = document.getElementById('speakerIcon');
+        const soundWave = document.getElementById('soundWave');
+        
+        // State variables
+        let isAudioPlaying = false;
+        
+        // Initialize when page loads (with 0.5s delay)
+        setTimeout(() => {
+            initAnimation();
+        }, 500);
+        
+        // Initialize animation
+        function initAnimation() {
+            // Show video after 3 seconds (when logo animation completes)
+            setTimeout(() => {
+                videoContainer.style.opacity = 0;
+                videoContainer.style.display = 'block';
+                // Start video playback
+                const video = document.querySelector('video');
+                if (video) {
+                    video.play().catch(e => console.log("Video autoplay prevented:", e));
+                }
+            }, 3000);
+            
+            // Show navigation buttons after 4 seconds
+            setTimeout(() => {
+                navButtons.style.display = 'flex';
+            }, 4000);
+            
+            // Initialize audio after 4.5 seconds
+            setTimeout(() => {
+                initAudio();
+            }, 4500);
+        }
+        
+        // Initialize audio from the specified path
+        function initAudio() {
+            if (!backgroundAudio) return;
+            
+            // Set audio properties
+            backgroundAudio.volume = 0.3; // 30% volume
+            backgroundAudio.loop = true;
+            
+            // Try to play audio
+            const playPromise = backgroundAudio.play();
+            
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    isAudioPlaying = true;
+                    updateAudioUI();
+                    console.log('Audio playing successfully');
+                }).catch(error => {
+                    console.log("Audio autoplay prevented. User interaction required:", error);
+                    isAudioPlaying = false;
+                    updateAudioUI();
+                    
+                    // Update UI to show muted state
+                    audioToggle.classList.add('audio-muted');
+                });
+            }
+        }
+        
+        // Toggle audio playback
+        function toggleAudio() {
+            if (!backgroundAudio) return;
+            
+            if (isAudioPlaying) {
+                backgroundAudio.pause();
+                isAudioPlaying = false;
+                audioToggle.classList.remove('audio-playing');
+                audioToggle.classList.add('audio-muted');
+            } else {
+                const playPromise = backgroundAudio.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        isAudioPlaying = true;
+                        audioToggle.classList.add('audio-playing');
+                        audioToggle.classList.remove('audio-muted');
+                    }).catch(error => {
+                        console.log("Audio play failed:", error);
+                        audioToggle.classList.add('audio-muted');
+                    });
+                }
+            }
+            updateAudioUI();
+        }
+        
+        // Update audio UI
+        function updateAudioUI() {
+            if (isAudioPlaying) {
+                audioToggle.classList.add('audio-playing');
+                audioToggle.classList.remove('audio-muted');
+                speakerIcon.classList.remove('fa-volume-mute');
+                speakerIcon.classList.add('fa-volume-up');
+            } else {
+                audioToggle.classList.remove('audio-playing');
+                audioToggle.classList.add('audio-muted');
+                speakerIcon.classList.remove('fa-volume-up');
+                speakerIcon.classList.add('fa-volume-mute');
+            }
+        }
+        
+        // Logo fallback handling
+        logoImg.addEventListener('error', function() {
+            console.log('Logo image failed to load, using fallback text');
+            logoContainer.classList.add('fallback');
+        });
+        
+        // Video fallback handling
+        const video = document.querySelector('video');
+        if (video) {
+            video.addEventListener('error', function() {
+                console.log('Video failed to load, using fallback background');
+                videoContainer.classList.add('fallback');
+            });
+        }
+        
+        // Event Listeners
+        audioToggle.addEventListener('click', function() {
+            // For mobile browsers, we need user interaction to play audio
+            if (!isAudioPlaying) {
+                // First try to play the audio
+                const playPromise = backgroundAudio.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        isAudioPlaying = true;
+                        updateAudioUI();
+                    }).catch(error => {
+                        console.log("Audio play failed on click:", error);
+                        // Show error message
+                        alert('Nature sound file not found at: files/Music/1min-nature.mp3');
+                    });
+                }
+            } else {
+                toggleAudio();
+            }
+        });
+        
+        // Handle audio file error
+        backgroundAudio.addEventListener('error', function(e) {
+            console.log('Audio file error:', backgroundAudio.error);
+            
+            // Update UI to show muted state
+            audioToggle.classList.add('audio-muted');
+            speakerIcon.classList.remove('fa-volume-up');
+            speakerIcon.classList.add('fa-volume-mute');
+            
+            // Remove click listener since audio won't work
+            audioToggle.removeEventListener('click', toggleAudio);
+            audioToggle.addEventListener('click', function() {
+                alert('Nature sound file not found at: files/Music/1min-nature.mp3');
+            });
+        });
+        
+        // Touch support for mobile
+        document.addEventListener('touchstart', function() {
+            // This helps with audio autoplay on mobile
+            if (!isAudioPlaying && backgroundAudio) {
+                backgroundAudio.play().then(() => {
+                    isAudioPlaying = true;
+                    updateAudioUI();
+                }).catch(e => console.log("Touch-initiated audio play failed:", e));
+            }
+        });
+        
+        // Add hover effect for nav buttons on touch devices
+        if ('ontouchstart' in window) {
+            document.querySelectorAll('.nav-button').forEach(button => {
+                button.addEventListener('touchstart', function() {
+                    this.style.transform = 'translateY(-5px) scale(1.05)';
+                    this.style.transition = 'transform 0.2s ease';
+                });
+                
+                button.addEventListener('touchend', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+        }
+        
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(event) {
+            // Space to toggle audio
+            if (event.code === 'Space') {
+                event.preventDefault();
+                toggleAudio();
+            }
+            
+            // Number keys 1-5 for navigation buttons
+            if (event.key >= '1' && event.key <= '5') {
+                const index = parseInt(event.key) - 1;
+                const buttons = document.querySelectorAll('.nav-button');
+                if (buttons[index]) {
+                    buttons[index].click();
+                }
+            }
+        });
+        
+        // Clean up when leaving page
+        window.addEventListener('beforeunload', function() {
+            if (backgroundAudio && isAudioPlaying) {
+                backgroundAudio.pause();
+            }
+        });
+    </script>
+</body>
+</html>

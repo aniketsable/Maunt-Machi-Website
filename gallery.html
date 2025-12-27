@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mount Machi Resort photo and video gallery. Explore our beautiful accommodations, facilities, and stunning natural surroundings.">
+    <meta name="keywords" content="resort gallery, photos, videos, accommodations, natural beauty">
+    <meta property="og:title" content="Gallery | Mount Machi Resort">
+    <meta property="og:description" content="Take a visual tour of Mount Machi Resort's beautiful spaces and natural surroundings.">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <title>Photo Gallery | Mount Machi Resort - Visual Tour</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #2E7D32;
+            --dark-green: #1B5E20;
+            --accent-beige: #FEEBB4;
+            --dark-maroon: #371419;
+            --light-maroon: #4A1F25;
+            --white: #FFFFFF;
+            --light-gray: #F5F5F5;
+            --text-dark: #333333;
+            --gold: #FFD700;
+            --premium-gold: #D4AF37;
+        }
+
+        /* ===== NEW RESPONSIVE NAVIGATION BAR ===== */
+        .navbar {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 10px 0;
+            transition: transform 0.25s ease;
+        }
+
+        .nav-container { display:flex; justify-content:space-between; align-items:center; padding:0 20px; }
+        .logo { z-index:1001; }
+        .logo img { height:45px; width:auto; transition: transform 0.3s ease; }
+        .logo:hover img { transform: scale(1.05); }
+        .nav-menu { display:flex; list-style:none; margin:0; padding:0; align-items:center; }
+        .nav-item { position:relative; margin:0 8px; }
+        .nav-link { text-decoration:none; color:var(--text-dark); font-weight:500; font-size:0.95rem; padding:8px 12px; border-radius:4px; transition:all 0.3s ease; display:block; }
+        .nav-link:hover { color:var(--primary-green); background-color: rgba(46,125,50,0.05); }
+        .nav-link.active { color:var(--primary-green); background-color: rgba(46,125,50,0.1); }
+        .nav-link.active::after { content:''; position:absolute; bottom:-5px; left:50%; transform:translateX(-50%); width:5px; height:5px; background-color:var(--primary-green); border-radius:50%; }
+        .nav-buttons { display:flex; align-items:center; gap:12px; }
+        .call-btn, .book-now-btn { padding:8px 16px; border-radius:20px; font-family:'Poppins',sans-serif; font-weight:500; cursor:pointer; border:none; font-size:0.9rem; transition:all 0.3s ease; }
+        .call-btn { background:transparent; border:2px solid var(--primary-green); color:var(--primary-green); }
+        .call-btn:hover { background:var(--primary-green); color:white; transform: translateY(-2px); }
+        .book-now-btn { background:var(--primary-green); color:white; }
+        .book-now-btn:hover { background:var(--dark-green); transform:translateY(-2px); box-shadow:0 4px 8px rgba(0,0,0,0.2); }
+        .hamburger { display:none; cursor:pointer; background:none; border:none; padding:10px; z-index:1001; }
+        .hamburger span { display:block; width:25px; height:3px; background-color:var(--text-dark); margin:5px 0; transition:0.3s; border-radius:2px; }
+        @media screen and (max-width: 968px) {
+            .navbar{padding:15px 0;} .hamburger{display:block;} .nav-menu{position:fixed; top:70px; left:-100%; flex-direction:column; background-color:var(--white); width:100%; height:calc(100vh - 70px); padding:40px 0; box-shadow:0 10px 15px rgba(0,0,0,0.1); transition:0.3s; overflow-y:auto; z-index:1000;} .nav-menu.active{left:0;} .nav-item{margin:15px 0; width:80%; text-align:center;} .nav-link{padding:12px 20px; font-size:1.1rem; border-radius:8px;} .nav-buttons{flex-direction:column; width:80%; margin-top:20px; gap:15px;} .call-btn, .book-now-btn{width:100%; padding:12px; font-size:1rem; }
+        }
+        @media screen and (max-width: 480px) { .nav-container{padding:0 15px;} .logo img{height:40px;} .nav-menu{top:65px; height:calc(100vh - 65px);} }
+        .navbar.nav-hidden { transform: translateY(-110%); }
+
+        /* Gallery Categories Navigation */
+        #gallery-nav {
+            position: fixed;
+            top: 80px;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            z-index: 999;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transform: translateY(0);
+            transition: transform 0.3s ease-in-out;
+            display: none; /* Initially hidden, shown by JS */
+        }
+
+        #gallery-nav.nav-hidden {
+            transform: translateY(-100%);
+        }
+
+        #gallery-nav.nav-visible {
+            transform: translateY(0);
+            display: block;
+        }
+
+        .gallery-categories {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding: 15px 20px;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .gallery-categories::-webkit-scrollbar {
+            display: none;
+        }
+
+        .category-btn {
+            padding: 10px 20px;
+            background: var(--white);
+            border: 2px solid var(--primary-green);
+            border-radius: 30px;
+            color: var(--primary-green);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            white-space: nowrap;
+            flex-shrink: 0;
+            font-size: 0.9rem;
+        }
+
+        .category-btn:hover,
+        .category-btn.active {
+            background: var(--primary-green);
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(46, 125, 50, 0.2);
+        }
+
+        /* Gallery Section */
+        .gallery-section {
+            padding: 40px 0 60px;
+            background-color: var(--light-gray);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            color: var(--dark-green);
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            color: var(--text-dark);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Photo Sections */
+        .photo-section {
+            margin-bottom: 80px;
+            scroll-margin-top: 180px;
+        }
+
+        .photo-section h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            color: var(--dark-maroon);
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent-beige);
+            position: relative;
+        }
+
+        .photo-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100px;
+            height: 2px;
+            background: var(--primary-green);
+        }
+
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: var(--white);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            aspect-ratio: 4/3;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.05);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+            padding: 20px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-caption {
+            color: var(--white);
+        }
+
+        .gallery-caption h4 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .gallery-caption p {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        .gallery-icon {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-green);
+            font-size: 1rem;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-icon {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Video Gallery */
+        .video-gallery {
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 2px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .video-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            background: var(--white);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .video-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .video-thumbnail-container {
+            position: relative;
+            height: 200px;
+            background: linear-gradient(135deg, var(--dark-green), var(--primary-green));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-thumbnail-container i {
+            font-size: 3.5rem;
+            color: rgba(255, 255, 255, 0.8);
+            z-index: 1;
+        }
+
+        .video-play {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.9);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-green);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            z-index: 2;
+        }
+
+        .video-item:hover .video-play {
+            background: rgba(255, 255, 255, 1);
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .video-caption {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .video-caption h4 {
+            color: var(--dark-maroon);
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+
+        .video-caption p {
+            color: var(--text-dark);
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Modals */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+            background: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .modal-img {
+            width: 100%;
+            height: auto;
+            max-height: 80vh;
+            object-fit: contain;
+            display: block;
+        }
+
+        .modal-video {
+            width: 100%;
+            max-height: 80vh;
+            display: block;
+            background: #000;
+        }
+
+        .modal-caption {
+            padding: 15px;
+            background: var(--white);
+            color: var(--text-dark);
+            border-top: 1px solid var(--light-gray);
+        }
+
+        .modal-caption h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: var(--dark-maroon);
+        }
+
+        .modal-caption p {
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            opacity: 0.8;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            border: none;
+            color: var(--white);
+            font-size: 2rem;
+            cursor: pointer;
+            z-index: 2001;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: rgba(0, 0, 0, 0.9);
+            transform: scale(1.1);
+        }
+
+        .modal-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2001;
+        }
+
+        .modal-prev {
+            left: 20px;
+        }
+
+        .modal-next {
+            right: 20px;
+        }
+
+        .modal-nav:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Note Section */
+        .gallery-note {
+            text-align: center;
+            margin-top: 60px;
+            padding: 25px;
+            background: var(--accent-beige);
+            border-radius: 12px;
+            color: var(--dark-maroon);
+            font-size: 1.1rem;
+            border: 2px dashed var(--primary-green);
+        }
+
+        .gallery-note i {
+            color: var(--primary-green);
+            margin-right: 10px;
+            font-size: 1.3rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 20px;
+            }
+            
+            .video-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .gallery-section {
+                padding: 30px 0 40px;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 15px;
+            }
+
+            .photo-section h3 {
+                font-size: 1.5rem;
+            }
+
+            #gallery-nav {
+                top: 70px;
+            }
+
+            .gallery-categories {
+                padding: 12px 15px;
+                justify-content: flex-start;
+            }
+
+            .category-btn {
+                padding: 8px 16px;
+                font-size: 0.85rem;
+            }
+
+            .video-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .modal-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+
+            .modal-prev {
+                left: 10px;
+            }
+
+            .modal-next {
+                right: 10px;
+            }
+
+            .modal-close {
+                width: 40px;
+                height: 40px;
+                font-size: 1.5rem;
+                top: 10px;
+                right: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .category-btn {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+            }
+
+            .gallery-section {
+                padding: 25px 0 30px;
+            }
+
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+
+            .photo-section h3 {
+                font-size: 1.3rem;
+            }
+
+            .video-thumbnail-container {
+                height: 180px;
+            }
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Navigation Footer */
+        .navigation-footer {
+            background-color: var(--dark-maroon);
+            padding: 30px 0;
+            margin-top: 80px;
+            border-top: 2px solid var(--primary-green);
+        }
+
+        .footer-nav ul {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .footer-nav a {
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: color 0.3s, transform 0.3s;
+            position: relative;
+            padding: 8px 0;
+        }
+
+        .footer-nav a:hover {
+            color: var(--accent-beige);
+            transform: translateY(-2px);
+        }
+
+        .footer-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-green);
+            transition: width 0.3s ease;
+        }
+
+        .footer-nav a:hover::after {
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .navigation-footer {
+                padding: 20px 0;
+                margin-top: 60px;
+            }
+
+            .footer-nav ul {
+                gap: 15px;
+                font-size: 0.9rem;
+            }
+
+            .footer-nav a {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Float Buttons */
+        .whatsapp-float, .call-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 30px;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-float {
+            background-color: #25d366;
+            color: white;
+            right: 30px;
+        }
+
+        .call-float {
+            background-color: var(--primary-green);
+            color: white;
+            right: 100px;
+        }
+
+        .whatsapp-float:hover, .call-float:hover {
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .whatsapp-float, .call-float {
+                width: 50px;
+                height: 50px;
+                font-size: 25px;
+                bottom: 20px;
+            }
+            .whatsapp-float {
+                right: 20px;
+            }
+            .call-float {
+                right: 80px;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: var(--primary-green);
+            font-size: 1.2rem;
+        }
+
+        .loading i {
+            margin-right: 10px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- New Responsive Navigation Bar -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <img src="files/images/logo.png" alt="Mount Machi Resort" loading="lazy" decoding="async">
+            </a>
+
+            <!-- Hamburger Menu Button -->
+            <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <!-- Navigation Menu -->
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="packages.html" class="nav-link">Packages</a></li>
+                <li class="nav-item"><a href="facilities.html" class="nav-link">Facilities</a></li>
+                <li class="nav-item"><a href="gallery.html" class="nav-link active">Gallery</a></li>
+                <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+
+            <!-- Action buttons removed from header desktop -->
+        </div>
+    </nav>
+
+    <!-- Gallery Navigation -->
+    <div id="gallery-nav" class="nav-hidden">
+        <div class="gallery-categories">
+            <button class="category-btn active" onclick="scrollToSection('entrance')">Entrance</button>
+            <button class="category-btn" onclick="scrollToSection('bar-dining')">Bar & Dining</button>
+            <button class="category-btn" onclick="scrollToSection('cottages')">Cottages Area</button>
+            <button class="category-btn" onclick="scrollToSection('machan')">Machan Area</button>
+            <button class="category-btn" onclick="scrollToSection('pool')">Swimming Pool</button>
+            <button class="category-btn" onclick="scrollToSection('lawn')">Lawn Area</button>
+            <button class="category-btn" onclick="scrollToSection('camping')">Camping & Bonfire</button>
+            <button class="category-btn" onclick="scrollToSection('play-garden')">Play Garden</button>
+            <button class="category-btn" onclick="scrollToSection('videos')">Videos</button>
+        </div>
+    </div>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section" id="gallery">
+        <div class="container">
+            <div class="section-title">
+                <h2>Resort Gallery</h2>
+                <p>Explore the beauty of Mount Machi Resort through our photo collection</p>
+            </div>
+
+            <!-- Photo Sections will be populated by JavaScript -->
+            <div id="photo-sections"></div>
+
+            <!-- Loading indicator -->
+            <div id="loading" class="loading">
+                <i class="fas fa-spinner"></i> Loading gallery...
+            </div>
+
+            <!-- Gallery Note -->
+            <div class="gallery-note">
+                <i class="fas fa-camera"></i> 
+                Want to see your photos featured here? Share your Mount Machi experience with #MountMachiResort on Instagram!
+            </div>
+        </div>
+    </section>
+
+    <!-- Image Modal -->
+    <div class="modal" id="imageModal">
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+        <button class="modal-nav modal-prev" onclick="prevImage()">&#10094;</button>
+        <button class="modal-nav modal-next" onclick="nextImage()">&#10095;</button>
+        <div class="modal-content">
+            <img id="modalImage" class="modal-img" src="" alt="">
+            <div class="modal-caption">
+                <h3 id="modalTitle"></h3>
+                <p id="modalDesc"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Video Modal -->
+    <div class="modal" id="videoModal">
+        <button class="modal-close" onclick="closeVideoModal()">&times;</button>
+        <div class="modal-content">
+            <video id="modalVideo" class="modal-video" controls autoplay>
+                <source src="" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <section class="navigation-footer">
+        <div class="container">
+            <nav class="footer-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="packages.html">Packages</a></li>
+                    <li><a href="facilities.html">Facilities</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </section>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/919075112200?text=Hi%20Mount%20Machi%20Resort%2C%20I%20have%20a%20question%20about%20your%20gallery%20photos" class="whatsapp-float" target="_blank" aria-label="Contact us on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Call Float Button -->
+    <a href="tel:+919075112200" class="call-float" aria-label="Call us">
+        <i class="fas fa-phone"></i>
+    </a>
+
+    <script>
+        // Available photos from filenames-photos.txt
+        const availablePhotos = [
+            "2 machi view.jpg",
+            "bar n dining house night view.jpg",
+            "bar n dining house.jpg",
+            "bonfire in front of machan.jpg",
+            "bottle view on pool.jpg",
+            "Carrom playing.jpg",
+            "cars parking.jpg",
+            "chai photo.jpg",
+            "clean pool.jpg",
+            "cotages area road or playing garden road.jpg",
+            "Cricket playing group.jpg",
+            "Cricket playing.jpg",
+            "dining area.PNG",
+            "entrance area2.jpg",
+            "entrance area3.jpg",
+            "entrance night view.jpg",
+            "entrance view.jpg",
+            "garden road.jpg",
+            "group enjoying bonfire.jpg",
+            "group enjoyment.jpg",
+            "lawn area clean.jpg",
+            "mach side view.jpg",
+            "machan view from swimming pool.jpg",
+            "machan with luxury room.jpg",
+            "machi balcony.jpg",
+            "machi day view front.jpg",
+            "machi room inside.PNG",
+            "machi upper best view.jpg",
+            "machi upper view.jpg",
+            "machi with tree.jpg",
+            "machan photo point.jpg",
+            "mountain view with swimming pool.jpg",
+            "night view of garden.jpg",
+            "playgroound area.jpg",
+            "pool activity.jpg",
+            "pool group photo.jpg",
+            "pool night lights.jpg",
+            "pool rain dance.jpg",
+            "pool with tree view.jpg",
+            "rain dance group.jpg",
+            "resort dog.jpg",
+            "resort tree view.jpg",
+            "resort trees.jpg",
+            "riffle shoot photo.jpg",
+            "riffle shoot photo pose.jpg",
+            "riffle shooting.jpg",
+            "Room interior lights.jpg",
+            "Room interior.jpg",
+            "room night view outside.jpg",
+            "Room outside night view.jpg",
+            "room outside with sky.jpg",
+            "rooms outside day.jpg",
+            "star light.jpg",
+            "swimming pool day.jpg",
+            "swimming pool front view.jpg",
+            "swimming pool rest beds.jpg",
+            "swimming pool view from trees.jpg",
+            "swimming pool view rom machan.jpg",
+            "swimming pool view.jpg",
+            "swimming pool with beds.jpg",
+            "pool with hills.jpg",
+            "swimming pool with sky view.jpg",
+            "swimming pool with tree.jpg"
+        ];
+
+        // Available videos from filenames video.txt
+        const availableVideos = [
+            "Customer-Feedback-Video.mp4",
+            "IMG_8073.MOV",
+            "IMG_8100.MOV",
+            "IMG_8101.MOV",
+            "IMG_8102.MOV",
+            "IMG_8103.MOV",
+            "IMG_8104.MOV",
+            "IMG_8105.MOV",
+            "IMG_8106.MOV",
+            "IMG_8107.MOV",
+            "IMG_8237.MOV",
+            "IMG_8279.MOV",
+            "IMG_8280.MOV",
+            "IMG_8281.MOV",
+            "IMG_8283.MOV",
+            "IMG_8289.MOV",
+            "IMG_8290.MOV",
+            "IMG_8291.MOV",
+            "IMG_8292.MOV",
+            "IMG_8293.MOV",
+            "IMG_8294.MOV",
+            "IMG_8295.MOV",
+            "IMG_8296.MOV",
+            "IMG_8297.MOV",
+            "IMG_8298.MOV",
+            "IMG_8299.MOV",
+            "IMG_8300.MOV",
+            "IMG_8301.MOV",
+            "IMG_8302.MOV",
+            "IMG_8303.MOV",
+            "IMG_8304.MOV",
+            "IMG_8305.MOV",
+            "IMG_8306.MOV",
+            "IMG_8307.MOV",
+            "IMG_8308.MOV",
+            "IMG_8309.MOV",
+            "IMG_8310.MOV",
+            "IMG_8311.MOV",
+            "IMG_8312.MOV",
+            "IMG_8313.MOV",
+            "IMG_8314.MOV",
+            "IMG_8315.MOV",
+            "IMG_8316.MOV",
+            "IMG_8317.MOV"
+        ];
+
+        // Photo data organized by category - only including available photos
+        const photoCategories = {
+            'entrance': availablePhotos.filter(photo => 
+                photo.includes('entrance') || photo.includes('Entrance')
+            ),
+            'bar-dining': availablePhotos.filter(photo => 
+                photo.includes('bar') || photo.includes('dining') || photo.includes('chai')
+            ),
+            'cottages': availablePhotos.filter(photo => 
+                photo.includes('room') || photo.includes('Room') || photo.includes('cotages') || photo.includes('machi room')
+            ),
+            'machan': availablePhotos.filter(photo => 
+                photo.includes('mach') && !photo.includes('machi room') && !photo.includes('mountain')
+            ),
+            'pool': availablePhotos.filter(photo => 
+                photo.includes('pool') || photo.includes('Pool') || photo.includes('swimming')
+            ),
+            'lawn': availablePhotos.filter(photo => 
+                photo.includes('lawn') || photo.includes('garden') || photo.includes('tree') && !photo.includes('machi with tree')
+            ),
+            'camping': availablePhotos.filter(photo => 
+                photo.includes('bonfire') || photo.includes('rain dance') || photo.includes('group')
+            ),
+            'play-garden': availablePhotos.filter(photo => 
+                photo.includes('play') || photo.includes('Play')
+            ),
+            'activities': availablePhotos.filter(photo => 
+                photo.includes('pose') || photo.includes('Cricket') || photo.includes('riffle') || 
+                photo.includes('cars') || photo.includes('dog')
+            )
+        };
+
+        // Filter out empty categories
+        Object.keys(photoCategories).forEach(category => {
+            if (photoCategories[category].length === 0) {
+                delete photoCategories[category];
+            }
+        });
+
+        // Video data - only including available videos
+        const videoData = availableVideos.map(video => ({
+            src: `files/Videos/${video}`,
+            title: video.replace(/\.[^/.]+$/, "").replace(/[_-]/g, ' '),
+        }));
+
+        // All images array for modal navigation
+        let allImages = [];
+        let currentImageIndex = 0;
+
+        // Category titles mapping
+        const categoryTitles = {
+            'entrance': 'Entrance Area',
+            'bar-dining': 'Bar & Dining Area',
+            'cottages': 'Cottages & Rooms Area',
+            'machan': 'Machan Area (Machi)',
+            'pool': 'Swimming Pool Area',
+            'lawn': 'Lawn & Garden Area',
+            'camping': 'Camping & Bonfire Area',
+            'play-garden': 'Play & Garden Area',
+            'activities': 'Activities & Fun'
+        };
+
+        // Category descriptions
+        const categoryDescriptions = {
+            'entrance': 'Beautiful entrance and welcome areas of Mount Machi Resort',
+            'bar-dining': 'Dining spaces and bar area for delicious meals and drinks',
+            'cottages': 'Comfortable accommodations and room interiors',
+            'machan': 'Premium Machan area with luxury rooms and stunning views',
+            'pool': 'Swimming pool and water activities area',
+            'lawn': 'Green lawns and beautiful garden spaces',
+            'camping': 'Bonfire nights and camping experiences',
+            'play-garden': 'Children play area and garden spaces',
+            'activities': 'Fun activities and sports at the resort'
+        };
+
+        // Function to generate photo sections
+        function generatePhotoSections() {
+            const container = document.getElementById('photo-sections');
+            container.innerHTML = '';
+            
+            // Generate each category section
+            for (const [category, photos] of Object.entries(photoCategories)) {
+                if (photos.length === 0) continue;
+                
+                const section = document.createElement('div');
+                section.className = 'photo-section';
+                section.id = category;
+                
+                // Add title
+                const title = document.createElement('h3');
+                title.textContent = categoryTitles[category] || category;
+                section.appendChild(title);
+                
+                // Add description
+                const desc = document.createElement('p');
+                desc.textContent = categoryDescriptions[category] || '';
+                desc.style.color = 'var(--text-dark)';
+                desc.style.marginBottom = '20px';
+                desc.style.fontStyle = 'italic';
+                section.appendChild(desc);
+                
+                // Create gallery grid
+                const grid = document.createElement('div');
+                grid.className = 'gallery-grid';
+                
+                // Add photos to grid
+                photos.forEach((photo, index) => {
+                    const photoIndex = allImages.length;
+                    allImages.push({
+                        src: `files/Photos/${photo}`,
+                        title: categoryTitles[category] || category,
+                        desc: `Photo ${index + 1}`,
+                        category: category
+                    });
+                    
+                    const item = document.createElement('div');
+                    item.className = 'gallery-item';
+                    item.onclick = () => openModal(photoIndex);
+                    
+                    // Create image
+                    const img = document.createElement('img');
+                    img.src = `files/Photos/${photo}`;
+                    img.alt = `${categoryTitles[category] || category} - Photo ${index + 1}`;
+                    img.className = 'gallery-img';
+                    img.loading = 'lazy';
+                    item.appendChild(img);
+                    
+                    // Create overlay
+                    const overlay = document.createElement('div');
+                    overlay.className = 'gallery-overlay';
+                    
+                    const caption = document.createElement('div');
+                    caption.className = 'gallery-caption';
+                
+                    
+                    // Create icon
+                    const icon = document.createElement('div');
+                    icon.className = 'gallery-icon';
+                    icon.innerHTML = '<i class="fas fa-expand"></i>';
+                    item.appendChild(icon);
+                    
+                    // Add animation delay
+                    item.style.animationDelay = `${index * 0.1}s`;
+                    
+                    grid.appendChild(item);
+                });
+                
+                section.appendChild(grid);
+                container.appendChild(section);
+            }
+            
+            // Add video section
+            if (videoData.length > 0) {
+                const videoSection = document.createElement('div');
+                videoSection.className = 'video-gallery';
+                videoSection.id = 'videos';
+                
+                const videoTitle = document.createElement('div');
+                videoTitle.className = 'section-title';
+                videoTitle.innerHTML = '<h2>Video Gallery</h2><p>Experience Mount Machi through our video collection</p>';
+                videoSection.appendChild(videoTitle);
+                
+                // Video grid
+                const videoGrid = document.createElement('div');
+                videoGrid.className = 'video-grid';
+                
+                videoData.forEach((video, index) => {
+                    const item = document.createElement('div');
+                    item.className = 'video-item';
+                    item.onclick = () => playVideo(video.src);
+                    
+                    // Create thumbnail container
+                    const thumbContainer = document.createElement('div');
+                    thumbContainer.className = 'video-thumbnail-container';
+                    thumbContainer.innerHTML = `
+                        <i class="fas fa-video"></i>
+                        <div class="video-play">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    `;
+                    item.appendChild(thumbContainer);
+                    
+                    // Create caption
+                    const caption = document.createElement('div');
+                    caption.className = 'video-caption';
+                    caption.innerHTML = `
+                        <p>Video ${index + 1} of ${videoData.length}</p>
+                    `;
+                    item.appendChild(caption);
+                    
+                    videoGrid.appendChild(item);
+                });
+                
+                videoSection.appendChild(videoGrid);
+                container.appendChild(videoSection);
+            }
+            
+            // Hide loading indicator
+            document.getElementById('loading').style.display = 'none';
+            
+            // Initialize category button highlighting
+            initCategoryHighlighting();
+        }
+
+        // Modal functions
+        function openModal(index) {
+            currentImageIndex = index;
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalDesc = document.getElementById('modalDesc');
+            
+            modalImage.src = allImages[index].src;
+            modalTitle.textContent = allImages[index].title;
+            modalDesc.textContent = allImages[index].desc;
+            
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        function prevImage() {
+            currentImageIndex = (currentImageIndex - 1 + allImages.length) % allImages.length;
+            const modalImage = document.getElementById('modalImage');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalDesc = document.getElementById('modalDesc');
+            
+            modalImage.src = allImages[currentImageIndex].src;
+            modalTitle.textContent = allImages[currentImageIndex].title;
+            modalDesc.textContent = allImages[currentImageIndex].desc;
+        }
+        
+        function nextImage() {
+            currentImageIndex = (currentImageIndex + 1) % allImages.length;
+            const modalImage = document.getElementById('modalImage');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalDesc = document.getElementById('modalDesc');
+            
+            modalImage.src = allImages[currentImageIndex].src;
+            modalTitle.textContent = allImages[currentImageIndex].title;
+            modalDesc.textContent = allImages[currentImageIndex].desc;
+        }
+
+        // Video modal functions
+        function playVideo(videoSrc) {
+            const modal = document.getElementById('videoModal');
+            const video = document.getElementById('modalVideo');
+            video.src = videoSrc;
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            video.play();
+        }
+
+        function closeVideoModal() {
+            const modal = document.getElementById('videoModal');
+            const video = document.getElementById('modalVideo');
+            video.pause();
+            video.src = '';
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Smooth scroll to sections
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                // Update active button
+                document.querySelectorAll('.category-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                event.target.classList.add('active');
+                
+                // Smooth scroll
+                section.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
+
+        // Initialize category button highlighting based on scroll position
+        function initCategoryHighlighting() {
+            const sections = document.querySelectorAll('.photo-section, .video-gallery');
+            const navButtons = document.querySelectorAll('.category-btn');
+            
+            const observerOptions = {
+                root: null,
+                rootMargin: '-20% 0px -70% 0px',
+                threshold: 0
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.id;
+                        navButtons.forEach(btn => {
+                            btn.classList.remove('active');
+                            if (btn.getAttribute('onclick').includes(id)) {
+                                btn.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+            
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        }
+
+        // Header and Gallery Navigation hide/show on scroll (uses navbar)
+        let lastScrollTop = 0;
+        const navbar = document.querySelector('.navbar');
+        const galleryNav = document.getElementById('gallery-nav');
+        let galleryNavVisible = false;
+
+        function handleScroll() {
+            const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+            // Toggle gallery nav visibility
+            if (galleryNav) {
+                if (currentScroll > 100 && !galleryNavVisible) { galleryNav.classList.add('nav-visible'); galleryNavVisible = true; }
+                else if (currentScroll <= 100) { galleryNav.classList.remove('nav-visible'); galleryNavVisible = false; }
+            }
+
+            // Hide navbar and gallery nav when scrolling down
+            if (currentScroll > lastScrollTop && currentScroll > 150) {
+                if (navbar) navbar.classList.add('nav-hidden');
+                if (galleryNav && galleryNavVisible) galleryNav.classList.add('nav-hidden');
+            } else {
+                if (navbar) navbar.classList.remove('nav-hidden');
+                if (galleryNav && galleryNavVisible) galleryNav.classList.remove('nav-hidden');
+            }
+
+            lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+        }
+
+        // Mobile menu toggle using hamburger
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+        if (hamburger && navMenu) {
+            hamburger.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                hamburger.classList.toggle('active');
+                if (navMenu.classList.contains('active')) document.body.style.overflow = 'hidden';
+                else document.body.style.overflow = 'auto';
+            });
+        }
+
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                if (navMenu) navMenu.classList.remove('active');
+                if (hamburger) hamburger.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+        });
+
+        // Close modals with ESC key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') { closeModal(); closeVideoModal(); }
+            else if (e.key === 'ArrowLeft') { prevImage(); }
+            else if (e.key === 'ArrowRight') { nextImage(); }
+        });
+
+        // Close modal when clicking outside
+        const imgModal = document.getElementById('imageModal');
+        if (imgModal) imgModal.addEventListener('click', function(e) { if (e.target === this) closeModal(); });
+        const vidModal = document.getElementById('videoModal');
+        if (vidModal) vidModal.addEventListener('click', function(e) { if (e.target === this) closeVideoModal(); });
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            generatePhotoSections();
+            window.addEventListener('scroll', handleScroll, { passive: true });
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+            });
+        });
+
+        // Handle image errors
+        document.addEventListener('error', function(e) {
+            if (e.target && e.target.tagName === 'IMG') {
+                e.target.src = 'https://via.placeholder.com/400x300/2E7D32/FFFFFF?text=Image+Not+Found';
+                e.target.onerror = null;
+            }
+        }, true);
+    </script>
+</body>
+</html>
