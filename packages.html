@@ -785,7 +785,7 @@
         .booking-section h3 {
             text-align: center;
             font-size: 2rem;
-            color: var(--dark-maroon);
+            color: black;
             margin-bottom: 40px;
             font-family: 'Montserrat', sans-serif;
         }
@@ -821,12 +821,18 @@
             font-family: 'Poppins', sans-serif;
             font-size: 1rem;
             transition: border 0.3s;
+            color: black;
         }
 
         .form-control:focus {
             outline: none;
             border-color: var(--primary-green);
             box-shadow: 0 0 0 2px rgba(46, 125, 50, 0.2);
+        }
+
+        select option {
+            color: black;
+            background-color: white;
         }
 
         textarea.form-control {
@@ -1709,7 +1715,7 @@
                         </div>
                         <div class="form-group">
                             <label for="phone">Phone Number *</label>
-                            <input type="tel" id="phone" class="form-control" required placeholder="Enter 10-digit mobile number">
+                            <input type="tel" id="phone" class="form-control" required placeholder="Enter 10-digit mobile number" maxlength="10">
                         </div>
                     </div>
                     
@@ -1731,7 +1737,7 @@
                         </div>
                         <div class="form-group">
                             <label for="guests">Number of Guests *</label>
-                            <input type="number" id="guests" class="form-control" min="1" max="10" required placeholder="Number of guests">
+                            <input type="number" id="guests" class="form-control" min="1" max="99" required placeholder="Number of guests">
                         </div>
                     </div>
                     
